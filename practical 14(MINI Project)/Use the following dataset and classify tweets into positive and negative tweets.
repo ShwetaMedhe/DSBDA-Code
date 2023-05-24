@@ -1,0 +1,53 @@
+import pandas as pd
+
+df = pd.read_csv('Tweets.csv')
+
+df
+
+df.shape
+
+df = pd.read_csv('tweets.csv',nrows = 10000)
+
+df
+
+df.shape
+
+
+sent = 'Hii, Where are you?'
+
+import string
+
+string.punctuation
+
+count = sum([1 for x in sent if x in string.punctuation])
+
+per = count/(len(sent)-sent.count(' '))
+
+per
+
+import string
+
+string.punctuation
+
+def count_punct(sent):
+    count = sum([1 for x in sent if x in string.punctuation])
+    p = round(count/(len(sent)-sent.count(' '))*100,2)
+    return p
+
+count_punct(sent)
+
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+ps = PorterStemmer()
+
+s_words = stopwords.words('english')
+
+#analyser function
+def clean_text(text):
+    data = [x for x in text if x not in string.punctuation]
+    data = ''.join(data)
+    data = [ps.stem(x) for x in data.split() if x not in s_words]
+    return data
+
+clean_text(sent)
+
