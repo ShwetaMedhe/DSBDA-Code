@@ -1,0 +1,107 @@
+import pandas as pd
+
+import numpy as np
+
+from sklearn.preprocessing import StandardScaler
+
+from sklearn.metrics import confusion_matrix,ConfusionMatrixDisplay,classification_report,accuracy_score, precision_score, recall_score, f1_score
+
+
+df = pd.read_csv('Social_Network_Ads.csv')
+
+df
+
+#input data
+x=df[['Age','EstimatedSalary']]
+#output data
+y=df['Purchased']
+
+
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+x_scaled = scaler.fit_transform(x)
+
+#cross. validation
+from sklearn.model_selection import train_test_split
+
+x_train, x_test, y_train, y_test = train_test_split(x_scaled,y,random_state=0,test_size = 0.25)
+
+x_train
+
+y_train
+
+from sklearn.linear_model import LogisticRegression
+
+import seaborn as sns
+sns.countplot(x=y)
+
+y.value_counts()
+
+#creat the object
+classifier = LogisticRegression()
+
+classifier.fit(x_train,y_train)
+
+#predication
+y_pred = classifier.predict(x_test)
+
+y_train.shape
+
+x_train.shape
+
+y_pred
+
+y_test
+
+import matplotlib.pyplot as plt
+
+plt.xlabel('Age')
+plt.ylabel('Salary')
+plt.scatter(x['Age'],x['EstimatedSalary'],c=y)
+
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+x_scaled = scaler.fit_transform(x)
+
+pd.DataFrame(x_scaled).describe()
+
+plt.xlabel('Age')
+plt.ylabel('Salary')
+plt.scatter(x_scaled[:,0],x_scaled[:,1],c=y)
+
+lr = LogisticRegression(random_state = 0,solver = 'lbfgs')
+lr.fit(x_train,y_train)
+pred = lr.predict(x_test)
+       
+print(x_test[:10])
+print('-'*15)
+print(pred[:10])
+
+
+print('Expected Output:',pred[:10])
+print('-'*15)
+print('Predicted Output:\n',y_test[:10])
+
+matrix = confusion_matrix(y_test,pred,labels = lr.classes_)
+print(matrix)
+
+tp, fn, fp, tn = confusion_matrix(y_test,pred,labels=[1,0]).reshape(-1)
+
+conf_matrix = ConfusionMatrixDisplay(confusion_matrix=matrix,display_labels=lr.classes_)
+conf_matrix.plot(cmap=plt.cm.Blues)
+plt.show()
+
+from sklearn.metrics import accuracy_score
+accuracy_score(y_test,y_pred)
+
+from sklearn.metrics import classification_report
+
+print(classification_report(y_test,y_pred))
+
+new1=[[26,34000]]
+new2=[[57,138000]]
+
+classifier.predict(scaler.transform(new1))
+
+classifier.predict(scaler.transform(new2))
+
