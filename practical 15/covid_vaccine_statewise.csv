@@ -1,0 +1,37 @@
+import numpy as np 
+import pandas as pd
+import warnings 
+warnings.filterwarnings("ignore")
+df=pd.read_csv("covid_vaccine_statewise.csv")
+
+df.describe()
+
+print("Number of persons state wise vaccinated for first dose in India")
+first_dose = df.groupby('State')[['First Dose Administered']].sum()
+first_dose
+
+print("Number of persons state wise vaccinated for second dose in India")
+
+first_dose = df.groupby('State')[['Second Dose Administered']].sum()
+first_dose
+
+male = df["Male(Individuals Vaccinated)"].sum()
+print("Number of Males vaccinated are", int(male))
+
+female = df["Female(Individuals Vaccinated)"].sum()
+print("Number of females vaccinated are", int(female))
+
+df.info()
+
+df.describe(include='object')
+
+df.shape
+
+df.head()
+
+df.tail()
+
+male.max()
+
+female.max()
+
