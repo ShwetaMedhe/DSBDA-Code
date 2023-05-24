@@ -1,0 +1,74 @@
+import pandas as pd
+
+
+df= pd.read_csv('student.csv')
+
+df
+
+
+df.mean()
+#mean
+
+df.median()
+#median
+
+#standarad deviation
+df.std()
+
+df.min()
+#min
+
+df.max()
+#max
+
+import numpy as np
+
+np.std(df['marks'])
+
+gr1 = df.groupby('class')
+
+te = gr1.get_group('TE')
+
+te.min()
+
+te.max()
+
+gr2 = df.groupby('age')
+
+gr2.groups
+
+tw = gr2.get_group(20)
+
+tw
+
+import seaborn as sns
+
+df = sns.load_dataset('iris')
+
+df
+
+df = px.data.iris()
+
+#https://mitu.co.in
+df=pd.read_csv('iris.csv')
+df
+df.describe()
+
+gr = df.groupby('Species')
+
+se = gr.get_group('Iris-setosa')
+ve = gr.get_group('Iris-versicolor')
+vi = gr.get_group('Iris-virginica')
+
+se.shape
+
+ve.shape
+
+vi.shape
+
+se.describe()
+
+ve.describe()
+
+vi.describe()
+
