@@ -1,0 +1,87 @@
+import pandas as pd
+
+
+df = pd.read_csv('BostonHousing.csv')
+
+df
+
+df.head()
+
+
+#import data
+x = df.drop('medv',axis = 1)
+
+#output data
+y = df['medv']
+
+x.shape
+
+from sklearn.model_selection import train_test_split
+
+x_train,x_test,y_train,y_test = train_test_split(x,y,random_state = 0,test_size=0.25)
+
+x_train
+
+x_train.head()
+
+x_train.shape
+
+x_test.shape
+
+from sklearn.linear_model import LinearRegression
+#import the class
+
+#create the object
+regressor = LinearRegression()
+
+#Train the Algorithm
+regressor.fit(x_train,y_train)
+
+#Train the Algorithm
+regressor.fit(x_train,y_train)
+
+#Train the Algorithm
+regressor.coef_
+
+regressor.intercept_
+
+#predictions
+y_pred = regressor.predict(x_test)
+
+y_pred.shape
+
+result = pd.DataFrame({'Actual':y_test,'Producted':y_pred})
+
+result
+
+
+residual_error = abs(y_test-y_pred)
+
+residual_error
+
+residual_error;
+
+#mean absolute error
+sum(residual_error)/len(residual_error)
+
+from sklearn.metrics import mean_absolute_error
+mean_absolute_error(y_pred,y_test)
+
+from sklearn.metrics import mean_absolute_percentage_error
+
+mean_absolute_percentage_error(y_test,y_pred)
+
+regressor.score(x_test,y_test)
+
+#pip install scikit-learn-U
+#for the installation of Scikit
+
+from sklearn.metrics import r2_score
+r2_score(y_test,y_pred)
+
+new = [[0.7528,0,8.64,0,0.538,5.727,69.6,3.7965,4,307,22,391.95,11.28]]
+
+new
+
+regressor.predict(new)
+
